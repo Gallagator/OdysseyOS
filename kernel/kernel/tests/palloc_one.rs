@@ -5,6 +5,7 @@
 #![reexport_test_harness_main = "test_main"]
 
 use kernel_boot_interface::BootInfo;
+use odysseos::memory;
 
 #[no_mangle]
 pub extern "C" fn _kernel_start() -> ! {
@@ -13,9 +14,11 @@ pub extern "C" fn _kernel_start() -> ! {
 }
 
 #[test_case]
-fn palloc(boot_info: &BootInfo) {}
-
-#[panic_handler]
-pub fn test_panic(info: &core::panic::PanicInfo) -> ! {
-    kernel_test::panic(info);
+fn palloc(boot_info: &BootInfo) {
+    memory::palloc::init(&boot_info.hhdm, &boot_info.memmap);
 }
+
+//#[panic_handler]
+//pub fn test_panic(info: &core::panic::PanicInfo) -> ! {
+//    kernel_test::panic(info);
+//}

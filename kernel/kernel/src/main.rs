@@ -20,10 +20,12 @@ unsafe fn put_white(x: u64, y: u64, binfo: &kernel_boot_interface::BootInfo) {
     *(ptr.offset(offset as isize) as *mut u32) = 0xffff_ffff;
 }
 
-#[cfg(not(test))]
 #[no_mangle]
 pub extern "C" fn _kernel_start() -> ! {
     let boot_info = kernel_boot::arch_init();
+
+    #[cfg(test)]
+    test_main();
 
     palloc::init(&boot_info.hhdm, &boot_info.memmap);
 
@@ -35,15 +37,5 @@ pub extern "C" fn _kernel_start() -> ! {
         unsafe { put_white(i, i, &boot_info) };
     }
 
-    #[cfg(test)]
-    test_main();
-
-    kernel_cpu::hcf();
-}
-
-#[cfg(test)]
-#[no_mangle]
-pub extern "C" fn _kernel_start() -> ! {
-    test_main();
     kernel_cpu::hcf();
 }
