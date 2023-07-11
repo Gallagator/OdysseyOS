@@ -1,28 +1,30 @@
+[workspace]
+
+[workspace.dependencies]
+kernel-boot = {path = "arch/modules/boot"}
+kernel-cpu = {path = "arch/modules/cpu"}
+kernel-paging = {path = "arch/modules/paging"}
+kernel-serial = {path = "arch/modules/serial"}
+kernel-shutdown = {path = "arch/modules/shutdown"}
+
+kernel-boot-interface = {path = "lib/kernel-boot-interface"}
+kernel-log = {path = "lib/kernel-log"}
+kernel-test = {path = "lib/kernel-test"}
+metamorphoses = {path = "lib/metamorphoses"}
+
+kernel = {path = "kernel"}
+
 [package]
 name = "odysseos"
-version = "0.1.0"
+version = "0.0.0"
 edition = "2021"
 
 [dependencies]
-# External libs
-spin = "0.9"
-
-# Arch
-kernel-cpu = {path = "arch/modules/cpu"}
-kernel-boot = {path = "arch/modules/boot"}
-kernel-paging = {path = "arch/modules/paging"}
-
-# Lib
-metamorphoses = {path = "lib/metamorphoses/"}
-kernel-boot-interface = {path = "lib/kernel-boot-interface"}
-kernel-test = {path = "lib/kernel-test"}
-kernel-log = {path = "lib/kernel-log"}
-
-[profile.dev]
-opt-level = 3
-
-[profile.release]
-lto = "fat"
+kernel = {workspace = true}
 
 [build-dependencies]
-kernel-build = { path = "arch/modules/build" }
+kernel-build = {path = "arch/modules/build"}
+
+[lib]
+crate-type = ["staticlib"]
+path = "mod.rs"

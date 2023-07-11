@@ -101,7 +101,7 @@ impl PagePool {
         page_pool
     }
 
-    fn mark_region(&mut self, entry: &MemmapEntry, is_set: bool) {
+    fn mark_region(&mut self, entry: &MemmapEntry, _is_set: bool) {
         let page_end_no = kernel_paging::page_min_no(entry.base);
         let page_start_no = kernel_paging::page_min_no(entry.end());
         self.bmap
