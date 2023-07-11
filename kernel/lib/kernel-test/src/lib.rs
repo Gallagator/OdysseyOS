@@ -1,8 +1,4 @@
 #![no_std]
-#![no_main]
-#![feature(custom_test_frameworks)]
-#![test_runner(test_runner)]
-#![reexport_test_harness_main = "test_main"]
 
 use kernel_boot_interface::BootInfo;
 use kernel_log::{kprint, kprintln};
@@ -35,17 +31,4 @@ pub fn panic(info: &core::panic::PanicInfo) -> ! {
     kprintln!("{:?}", info);
     kernel_shutdown::shutdown(kernel_shutdown::ShutdownExitCode::Failed);
     kernel_cpu::hcf();
-}
-
-#[cfg(test)]
-#[no_mangle]
-pub extern "C" fn _kernel_start() -> ! {
-    test_main();
-    kernel_cpu::hcf();
-}
-
-#[cfg(test)]
-#[panic_handler]
-pub fn test_panic(info: &core::panic::PanicInfo) -> ! {
-    panic(info);
 }
