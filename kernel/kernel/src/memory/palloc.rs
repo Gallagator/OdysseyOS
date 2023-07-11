@@ -3,8 +3,7 @@ use spin;
 
 use kernel_boot_interface::{
     hhdm::BootHhdm,
-    memmap::{MemType, Memmap, MemmapEntry},
-};
+    memmap::{MemType, Memmap, MemmapEntry}, };
 use metamorphoses::bitmap::{self, Bitmap, BitmapRange};
 
 use kernel_paging;
@@ -137,7 +136,7 @@ mod tests {
     }
 
     #[test_case]
-    fn largest_usable_entry(boot_info: &BootInfo) {
+    fn check_memory_pages(boot_info: &BootInfo) {
         assert!(get_num_memory_pages(&boot_info.memmap) > 0);
     }
 

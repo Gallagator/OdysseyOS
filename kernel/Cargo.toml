@@ -1,30 +1,17 @@
 [workspace]
 
-[workspace.dependencies]
-kernel-boot = {path = "arch/modules/boot"}
-kernel-cpu = {path = "arch/modules/cpu"}
-kernel-paging = {path = "arch/modules/paging"}
-kernel-serial = {path = "arch/modules/serial"}
-kernel-shutdown = {path = "arch/modules/shutdown"}
+resolver = "2"
 
-kernel-boot-interface = {path = "lib/kernel-boot-interface"}
-kernel-log = {path = "lib/kernel-log"}
-kernel-test = {path = "lib/kernel-test"}
-metamorphoses = {path = "lib/metamorphoses"}
+members = [
+"arch/modules/boot",
+"arch/modules/cpu",
+"arch/modules/paging",
+"arch/modules/serial",
+"arch/modules/shutdown",
+"lib/kernel-boot-interface",
+"lib/kernel-log",
+"lib/kernel-test",
+"lib/metamorphoses",
+"kernel",
+]
 
-kernel = {path = "kernel"}
-
-[package]
-name = "odysseos"
-version = "0.0.0"
-edition = "2021"
-
-[dependencies]
-kernel = {workspace = true}
-
-[build-dependencies]
-kernel-build = {path = "arch/modules/build"}
-
-[lib]
-crate-type = ["staticlib"]
-path = "mod.rs"

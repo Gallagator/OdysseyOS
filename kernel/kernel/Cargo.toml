@@ -1,7 +1,8 @@
 [package]
-name = "kernel"
+name = "odysseos"
 version = "0.1.0"
 edition = "2021"
+build = "../build.rs"
 
 [dependencies]
 # External libs
@@ -18,12 +19,5 @@ kernel-boot-interface = {path = "../lib/kernel-boot-interface"}
 kernel-test = {path = "../lib/kernel-test"}
 kernel-log = {path = "../lib/kernel-log"}
 
-[profile.dev]
-opt-level = 3
-
-[profile.release]
-lto = "fat"
-
-[lib]
-crate-type = ["staticlib"]
-path = "src/mod.rs"
+[build-dependencies]
+build-target = "0.4.0"

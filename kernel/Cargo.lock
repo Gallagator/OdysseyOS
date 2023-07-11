@@ -21,18 +21,10 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "bef38d45163c2f1dde094a7dfd33ccf595c92905c8f8f4fdc18d06fb1037718a"
 
 [[package]]
-name = "kernel"
-version = "0.1.0"
-dependencies = [
- "kernel-boot",
- "kernel-boot-interface",
- "kernel-cpu",
- "kernel-log",
- "kernel-paging",
- "kernel-test",
- "metamorphoses",
- "spin 0.9.8",
-]
+name = "build-target"
+version = "0.4.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "832133bbabbbaa9fbdba793456a2827627a7d2b8fb96032fa1e7666d7895832b"
 
 [[package]]
 name = "kernel-boot"
@@ -53,17 +45,6 @@ dependencies = [
 
 [[package]]
 name = "kernel-boot-interface"
-version = "0.1.0"
-
-[[package]]
-name = "kernel-build"
-version = "0.1.0"
-dependencies = [
- "kernel-build-impl",
-]
-
-[[package]]
-name = "kernel-build-impl"
 version = "0.1.0"
 
 [[package]]
@@ -165,17 +146,25 @@ dependencies = [
 name = "metamorphoses"
 version = "0.1.0"
 dependencies = [
- "kernel-build",
+ "build-target",
+ "kernel-boot-interface",
  "kernel-cpu",
  "kernel-test",
 ]
 
 [[package]]
 name = "odysseos"
-version = "0.0.0"
+version = "0.1.0"
 dependencies = [
- "kernel",
- "kernel-build",
+ "build-target",
+ "kernel-boot",
+ "kernel-boot-interface",
+ "kernel-cpu",
+ "kernel-log",
+ "kernel-paging",
+ "kernel-test",
+ "metamorphoses",
+ "spin 0.9.8",
 ]
 
 [[package]]
